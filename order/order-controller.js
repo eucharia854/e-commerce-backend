@@ -8,8 +8,8 @@ const userschema = require('./order-model')
 module.exports = {
   orderController:async (req, res) => {
     try{
-    const {userID, DeliveryDate, TotalAmount, Deliverystatus, orderdate, } = req.body
-    if (!userID || !DeliveryDate || !TotalAmount || !Deliverystatus || !orderdate){
+    const {userID, DeliveryDate, TotalAmount, Deliverystatus } = req.body
+    if (!userID || !DeliveryDate || !TotalAmount || !Deliverystatus){
       return res.status(500).json({ message: "userID is required" })
     }
     const FindUser = await userschema.findOne({userID: userID})

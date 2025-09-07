@@ -1,17 +1,14 @@
-const userModel = require("./cat-model")
-
-const userschema = require('./cat-model')
-
-
-
+const Category = require("./cat-model");
 
 module.exports = {
-  catController:async (req, res) => {
-    try{
-  const category = new Category(req.body);
-  await category.save();
-  return res.status(201).json({ message: "category created", category});
-    } catch(error) {res.status(400).json({error: error.message});}
+  catController: async (req, res) => {
+    try {
+      const category = await Category.create(req.body);
+
+      return res.status(201).json({ message: "category created", category });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
   },
   // get all categories
   getAllCategories: async (req, res) => {
@@ -21,5 +18,5 @@ module.exports = {
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
-  }
-}
+  },
+};

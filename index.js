@@ -1,16 +1,18 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const userRoutes = require ('./User/user-routes');
-const productRoutes = require ('./product/product-routes');
-const cartRoutes = require ('./shoppingcart/cart-routes');
-const orderRoutes = require ('./order/order-routes');
-const payRoutes = require ('./payment/payment-routes');
-const catRoutes = require ('./category/cat-routes');
-const app = express()
-app.use (express.urlencoded({ extended: true }));
-app.use (express.json());
+const express = require("express");
+const mongoose = require("mongoose");
+const userRoutes = require("./User/user-routes");
+const productRoutes = require("./product/product-routes");
+const cartRoutes = require("./shoppingcart/cart-routes");
+const orderRoutes = require("./order/order-routes");
+const payRoutes = require("./payment/payment-routes");
+const catRoutes = require("./category/cat-routes");
+const dotenv = require("dotenv");
+dotenv.config();
+const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 const connect = mongoose.connect("mongodb://localhost:27017/EKANI");
-if (connect){
+if (connect) {
   console.error("Success to connect to Database");
 }
 app.use(express.json({}));
@@ -21,7 +23,6 @@ app.use("/api/order", orderRoutes);
 app.use("/api/payments", payRoutes);
 app.use("/api/category", catRoutes);
 const port = 6000;
-app.listen (port, () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-})
-
+});
