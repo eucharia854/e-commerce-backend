@@ -2,6 +2,7 @@ const express = require("express");
 const {
   createProductController,
   getProductsController,
+  getProductsForCostumersController,
 } = require("./controller");
 const router = express.Router();
 const {
@@ -14,8 +15,8 @@ const upload = require("../middleware/fileUploadMiddleware");
 
 router.use(checkIfUserIsAuthenticated);
 router.get("/", getProductsController);
+router.get("/for-customers", getProductsForCostumersController);
 router.post("/", upload.single("imageUrl"), createProductController);
-
 
 // const { protect } = require("./middleware/authMiddleware");
 //Public route: get all product

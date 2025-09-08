@@ -10,13 +10,19 @@ module.exports = {
       res.status(400).json({ error: error.message });
     }
   },
-  // get all categories
+  // get all categories acccording to vendor
   getAllCategories: async (req, res) => {
     try {
       const categories = await Category.find();
-      return res.status(200).json({ categories });
+      return res.status(200).json({
+        message: "Categories fetched successfully",
+        categories,
+        success: true,
+      });
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
   },
+
+  
 };

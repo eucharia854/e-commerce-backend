@@ -5,7 +5,7 @@ const checkIfUserIsAuthenticated = require("../middleware/authorizationMiddlewar
 const {
   registerController,
   loginController,
-
+  getUserProfile,
   getPendingUsers,
   approveUser,
   rejectUser,
@@ -25,5 +25,6 @@ router.put(
   upload.single("avatar"),
   updateUserProfile
 );
+router.get("/profile", checkIfUserIsAuthenticated, getUserProfile);
 
 module.exports = router;

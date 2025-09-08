@@ -14,7 +14,7 @@ module.exports = {
         return res.status(403).json({ message: "Access denied" });
       }
 
-      const { Prodname, CostPrice, PostedDate } = req.body;
+      const { Prodname, CostPrice, PostedDate, description } = req.body;
 
       if (!Prodname || !CostPrice) {
         return res
@@ -36,8 +36,11 @@ module.exports = {
         CostPrice: CostPrice,
         PostedDate: PostedDate,
         userId: req.user._id,
-        imageUrl: req.file.filename,
+        imageUrl: `${req.protocol}://${req.get("host")}/uploads/${
+          req.file.filename
+        }`,
         category: req.body.category,
+        description,
       });
 
       return res
@@ -48,14 +51,34 @@ module.exports = {
       return res.status(500).json({ message: "Internal server error" });
     }
   },
+  //get according to vendor
   getProductsController: async (req, res) => {
     try {
       const products = await productModel
-        .find()
-        .populate("userId", "name email phone");
+        .find({ userId: req.user._id })
+        .populate("userId", "name email phone")
+        .populate("category", "name");
       return res.status(200).json({
         message: "Products retrieved successfully",
         products: products,
+        success: true,
+      });
+    } catch (error) {
+      console.log(error, "hello");
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  },
+  //get according to customer
+  getProductsForCostumersController: async (req, res) => {
+    try {
+      const products = await productModel
+        .find()
+        .populate("userId", "name email phone")
+        .populate("category", "name");
+      return res.status(200).json({
+        message: "Products retrieved successfully",
+        products: products,
+        success: true,
       });
     } catch (error) {
       console.log(error, "hello");

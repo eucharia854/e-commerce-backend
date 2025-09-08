@@ -10,6 +10,10 @@ const userschema = new schema(
       type: Number,
       required: true,
     },
+    description: {
+      type: String,
+      required: true,
+    },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

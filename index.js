@@ -7,8 +7,11 @@ const orderRoutes = require("./order/order-routes");
 const payRoutes = require("./payment/payment-routes");
 const catRoutes = require("./category/cat-routes");
 const dotenv = require("dotenv");
+const path = require("path");
 dotenv.config();
 const app = express();
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const connect = mongoose.connect("mongodb://localhost:27017/EKANI");
