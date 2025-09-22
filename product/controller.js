@@ -71,6 +71,7 @@ module.exports = {
   //get according to customer
   getProductsForCostumersController: async (req, res) => {
     try {
+      console.log("hello");
       const products = await productModel
         .find()
         .populate("userId", "name email phone")

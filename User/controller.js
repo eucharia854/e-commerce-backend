@@ -61,20 +61,23 @@ module.exports = {
           .status(401)
           .json({ message: "Invalid credentials", success: false });
       }
-      const token = jwt.sign({ user: user }, process.env.JWT_SECRET_KEY, {
-        expiresIn: "6h",
-      });
-      return res.status(200).json({
-        message: "Login successful",
-        token: token,
-        success: true,
-        data: user,
-      });
-    } catch (error) {
-      console.log(error, "the login crashed from the backend");
-      return res.status(500).json({ message: "Internal server error" });
-    }
-  },
+     const token = jwt.sign(
+      { user },                        // payload
+      process.env.JWT_SECRET_KEY,      // ✅ secret key from .env
+      { expiresIn: "6h" }              // options
+    );
+
+    return res.status(200).json({
+      message: "Login successful",
+      token,
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    console.error(error, "the login crashed from the backend");
+    return res.status(500).json({ message: "Internal server error" });
+  }
+},
 
   getUserProfile: async (req, res) => {
     try {

@@ -16,13 +16,11 @@ module.exports = {
       const categories = await Category.find();
       return res.status(200).json({
         message: "Categories fetched successfully",
-        categories,
+        categories: categories,
         success: true,
       });
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
   },
-
-  
 };

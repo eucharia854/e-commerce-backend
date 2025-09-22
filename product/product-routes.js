@@ -15,7 +15,7 @@ const upload = require("../middleware/fileUploadMiddleware");
 
 router.use(checkIfUserIsAuthenticated);
 router.get("/", getProductsController);
-router.get("/for-customers", getProductsForCostumersController);
+router.get("/costumers", getProductsForCostumersController);
 router.post("/", upload.single("imageUrl"), createProductController);
 
 // const { protect } = require("./middleware/authMiddleware");

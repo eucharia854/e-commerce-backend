@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
-const userschema = new schema(
+const paymentSchema = new schema(
   {
     orderId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "order",
-      required: true
+      required: false,
     },
     details: {
       type: String,
@@ -13,9 +13,9 @@ const userschema = new schema(
       required: true
     },
     paid: {
-      type: String,
-      Boolean: ["True", "False",],
-      default: "False"
+      type: Boolean,
+     
+      default: false
     },
     paymentDate: {
       type: Date,
@@ -26,4 +26,4 @@ const userschema = new schema(
       required: true
     }
   })
-module.exports = mongoose.model("Payment", userschema);
+module.exports = mongoose.model("Payment", paymentSchema);

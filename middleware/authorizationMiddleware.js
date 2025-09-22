@@ -12,7 +12,6 @@ const checkIfUserIsAuthenticated = (req, res, next) => {
   if (!decoded) {
     return res.status(401).json({ message: "Invalid token" });
   }
-  console.log("Decoded user:", decoded);
   req.user = decoded.user;
   next();
 };
